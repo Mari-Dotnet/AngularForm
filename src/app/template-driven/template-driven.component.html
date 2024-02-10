@@ -1,0 +1,140 @@
+
+<div class="container">
+    <h3>Template driven Form</h3>
+    <form #contactform="ngForm" (submit)="Save(contactform)">
+        <p>
+            <label for="firstname">First Name</label>
+            <input #firstname="ngModel" type="text" name="FirstName" id="firstname" [(ngModel)]="Employee.Firstname" required minlength="5" maxlength="10">
+            @if(!firstname.valid && firstname.touched){
+                <span style="color: red;">
+                    <span *ngIf="firstname.errors?.['minlength']">
+                    minumum lenth is 5 char required
+                    </span>
+                </span>
+                <span style="color: red;" *ngIf="firstname.errors?.['required']">
+                    please enter the firstname
+                </span>
+                <span style="color: red;" *ngIf="firstname.errors?.['maxlength']">
+                        maximum lenth is 10 char allowed
+               </span>
+            }
+            
+            
+        </p>
+    
+        <p>
+            <label for="lastname">Last Name</label>
+            <input type="text" #lastname="ngModel" name="LastName" id="lastname" [(ngModel)]="Employee.LastName" required minlength="3">
+            @if(!lastname.valid && lastname.touched){
+                <span style="color: red;">
+                    <span *ngIf="lastname.errors?.['minlength']">
+                    minumum lenth is 5 char required
+                    </span>
+                </span>
+                <span style="color: red;" *ngIf="lastname.errors?.['required']">
+                    please enter the LastName
+                </span>
+            }
+        </p>
+    
+        <p>
+            <label for="email">Email</label>
+            <input type="text" #email="ngModel" name="Email" id="email" [(ngModel)]="Employee.Email" required>
+            @if(!email.valid && email.touched){
+                <span style="color: red;" *ngIf="email.errors?.['required']">
+                    please enter the valid Email
+                </span>
+            }
+        </p>
+    
+        <p>
+            <label for="gender">Gender</label>
+             <input type="radio" id="male" value="Male"  #gender="ngModel" name="Gender" [(ngModel)]="Employee.Gender" required>
+            <label for="male">Male</label> 
+            <input #gender="ngModel" type="radio"  id="fe-male" value="Fe-Male"  name="Gender" [(ngModel)]="Employee.Gender" required>
+            <label for="fe-male">Fe-Male</label>
+
+            @if(!gender.valid && gender.touched){
+                <span style="color: red;" *ngIf="gender.errors?.['required']">
+                   Please select the Gender
+                </span>
+            }
+            
+        </p>
+    
+        <p>
+            <label for="isMarried">Married</label>
+            <input type="checkbox" #married="ngModel"  id="isMarried" name="Married" [(ngModel)]="Employee.Married" required>
+            @if(!married.valid && married.touched){
+                <span style="color: red;" *ngIf="married.errors?.['required']">
+                    please check you are married or not
+                </span>
+            }
+        </p>
+    
+        <p>
+            <label for="country">Country</label>
+            <select #country="ngModel" name="Country" id="country" [(ngModel)]="Employee.Country" required>
+                <option selected="true" value="">Please select</option>
+                @for (item of CountryList; track $index) {
+                    <option value={{item.Id}}>{{item.Name}}</option>
+                }
+
+            </select>
+            @if(!country.valid && country.touched){
+                <span style="color: red;" *ngIf="country.errors?.['required']">
+                    please select the country
+                </span>
+            }
+        </p>
+        <div ngModelGroup="Address">
+            <p>
+                <label for="City">City</label>
+                <input type="text"#city="ngModel" name="City" id="City" [(ngModel)]="Employee.Address.City" required minlength="3">
+                @if(!city.valid && city.touched){
+                    <span style="color: red;">
+                        <span *ngIf="city.errors?.['minlength']">
+                        minumum lenth is 5 char required
+                        </span>
+                    </span>
+                    <span style="color: red;" *ngIf="city.errors?.['required']">
+                        please enter the city
+                    </span>
+                }
+            </p>
+            <p>
+                <label for="street">Street</label>
+                <input type="text"  #street="ngModel" name="Street" id="Street" [(ngModel)]="Employee.Address.Street" required minlength="5">
+                @if(!street.valid && street.touched){
+                    <span style="color: red;">
+                        <span *ngIf="street.errors?.['minlength']">
+                        minumum lenth is 5 char required
+                        </span>
+                    </span>
+                    <span style="color: red;" *ngIf="street.errors?.['required']">
+                        please enter the street
+                    </span>
+                }
+            </p>
+            <p>
+                <label for="pincode">Pin code</label>
+                <input type="text" #pincode="ngModel" name="Pincode" id="pincode" [(ngModel)]="Employee.Address.Pincode" required="" minlength="6">
+                @if(!pincode.valid && pincode.touched){
+                    <span style="color: red;">
+                        <span *ngIf="pincode.errors?.['minlength']">
+                        minumum lenth is 6 char required
+                        </span>
+                    </span>
+                    <span style="color: red;" *ngIf="pincode.errors?.['required']">
+                        please enter the pincode
+                    </span>
+                }
+            </p>
+        </div>
+    
+        <p>
+            <button type="submit" [disabled]="!contactform.valid">Submit</button>
+        </p>
+    </form>
+</div>
+

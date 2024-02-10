@@ -1,0 +1,122 @@
+<div>
+    <h3>Reactive form works!</h3>
+    <form [formGroup]="contactform" (submit)="AddContact()">
+        <p>
+            <label for="firstname">First Name</label>
+            <input type="text" name="Firstname" id="firstname" formControlName="Firstname">
+        <span style="color: red;" *ngIf="!validatefirstname?.valid && validatefirstname?.touched">
+            <span style="color: red;" *ngIf="validatefirstname?.errors?.['minlength']">
+               Minimum five char is required for firstname
+            </span>
+            <span style="color: red;" *ngIf="validatefirstname?.errors?.['required']">
+           Please enter the first name
+            </span>
+        </span>
+        </p>
+    
+        <p>
+            <label for="lastname">Last Name</label>
+            <input type="text" name="Lastname" id="lastname" formControlName="Lastname">
+            <span style="color: red;" *ngIf="!validateLastname?.valid && validateLastname?.touched">
+                <span style="color: red;" *ngIf="validateLastname?.errors?.['minlength']">
+                   Minimum five char is required for Lastname
+                </span>
+                <span style="color: red;" *ngIf="validateLastname?.errors?.['required']">
+               Please enter the Last name
+                </span>
+            </span>
+        </p>
+    
+        <p>
+            <label for="email">Email</label>
+            <input type="text" name="Email" id="email" formControlName="Email">
+            <span style="color: red;" *ngIf="!validateEmail?.valid && validateEmail?.touched">
+                <span style="color: red;" *ngIf="validateEmail?.errors?.['required']">
+               Please enter the valid email
+                </span>
+            </span>
+        </p>
+    
+        <p>
+            <label for="gender">Gender</label>
+             <input type="radio" id="male" value="Male"   name="Gender"  formControlName="Gender">
+            <label for="male">Male</label> 
+            <input type="radio"  id="fe-male" value="Fe-Male"  name="Gender" formControlName="Gender">
+            <label for="fe-male">Fe-Male</label>
+            <span style="color: red;" *ngIf="!validateGender?.valid && validateGender?.touched">
+                <span style="color: red;" *ngIf="validateGender?.errors?.['required']">
+               Please select the Gender
+                </span>
+            </span>
+            
+        </p>
+    
+        <p>
+            <label for="isMarried">Married</label>
+            <input type="checkbox"  id="isMarried" name="IsMarried"  formControlName="IsMarried">
+            <span style="color: red;" *ngIf="!validateIsMarried?.valid && validateIsMarried?.touched">
+                <span style="color: red;" *ngIf="validateIsMarried?.errors?.['required']">
+               Please check if you are married
+                </span>
+            </span>
+        </p>
+    
+        <p>
+            <label for="country">Country</label>
+            <select name="country" id="country"  formControlName="country">
+                <option selected="true" value="">Please select</option>
+                <option value="1">IND</option>
+                <option  value="2">PAK</option>
+                <option  value="3">USA</option>
+            </select>
+
+            <span style="color: red;" *ngIf="!validatecountry?.valid && validatecountry?.touched">
+                <span style="color: red;" *ngIf="validatecountry?.errors?.['required']">
+               Please choose the country
+                </span>
+            </span>
+        </p>
+            <div formGroupName="Address">
+                <p>
+                    <label for="City">City</label>
+                    <input type="text" name="City" id="City" formControlName="City">
+                    <span style="color: red;" *ngIf="!validateCity?.valid && validateCity?.touched">
+                        <span style="color: red;" *ngIf="validateCity?.errors?.['minlength']">
+                           Minimum three char is required for city
+                        </span>
+                        <span style="color: red;" *ngIf="validateCity?.errors?.['required']">
+                       Please enter the city
+                        </span>
+                    </span>
+                </p>
+                <p>
+                    <label for="street">Street</label>
+                    <input type="text" name="Street" id="Street" formControlName="Street">
+                    <span style="color: red;" *ngIf="!validateStreet?.valid && validateStreet?.touched">
+                        <span style="color: red;" *ngIf="validateStreet?.errors?.['minlength']">
+                           Minimum five char is required for Street
+                        </span>
+                        <span style="color: red;" *ngIf="validateStreet?.errors?.['required']">
+                       Please enter the Last name
+                        </span>
+                    </span>
+                </p>
+                <p>
+                    <label for="pincode">Pin code</label>
+                    <input type="text" name="PinCode" id="pincode" formControlName="PinCode">
+                    <span style="color: red;" *ngIf="!validatePinCode?.valid && validatePinCode?.touched">
+                        <span style="color: red;" *ngIf="validatePinCode?.errors?.['minlength']">
+                           Minimum six digit is required for Pincode
+                        </span>
+                        <span style="color: red;" *ngIf="validatePinCode?.errors?.['required']">
+                       Please enter the Last Pincode
+                        </span>
+                    </span>
+                </p>
+            </div>
+
+        
+        <button type="submit" [disabled]="!contactform.valid">Submit</button>
+    </form>
+</div>
+
